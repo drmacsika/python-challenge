@@ -1,0 +1,21 @@
+version: "3.6"
+
+services:
+  api:
+    container_name: celus_api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      DB_URI: "mongodb://admin:pwd@mongo:27017/getRoutes"
+    ports:
+      - "8001:80"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:5.0
+    container_name: celus_mongo_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: pwd 
